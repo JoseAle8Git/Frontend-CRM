@@ -1,0 +1,111 @@
+.dashboard-container {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+
+.large-icon {
+  transform: scale(2);
+
+  color: #673ab7;
+
+}
+
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+.no-data {
+  color: #7cb342;
+
+  font-weight: 500;
+}
+
+mat-card {
+  height: 100%;
+
+}
+
+.tickets-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tickets-table th {
+  text-align: left;
+  color: #777;
+  font-size: 0.9rem;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.tickets-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.darkRed {
+  background: #ffebee;
+  color: #58151c;
+}
+
+.red {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.yellow {
+  background: #fff8e1;
+  color: #fbc02d;
+}
+
+.green {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-pill {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.table-container {
+  max-height: 250px;
+  overflow-y: auto;
+  display: block;
+}
