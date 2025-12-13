@@ -4,9 +4,10 @@ import { UserCreationRequest } from '../models/user-creation.interface';
 import { Observable } from 'rxjs';
 import { UserBasic } from '../models/user-basic.interface';
 import { ClientInfo } from '../models/client-dashboard.interface';
+import { environment } from '../../environments/environment.prod';
 
 // URL base para el controlador de usuarios.
-const USER_API_URL = 'http://localhost:8080/sistema/api/v1/users';
+// const USER_API_URL = 'http://localhost:8080/sistema/api/v1/users';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class UserService {
    */
   createNewUser(request: UserCreationRequest): Observable<UserBasic> {
     // La cookie HttpOnly con el JWT se adjunta automáticamente con la solicitud.
-    return this.http.post<UserBasic>(USER_API_URL, request, { withCredentials: true });
+    return this.http.post<UserBasic>(`${environment.apiUrl}/users`, request, { withCredentials: true });
   }
 
   /**
@@ -31,7 +32,7 @@ export class UserService {
    */
   getAllBasicUsers(): Observable<UserBasic[]> {
     // Endpoint: /users/basic-list.
-    return this.http.get<UserBasic[]>(`${USER_API_URL}/basic-list`, { withCredentials: true });
+    return this.http.get<UserBasic[]>(`${environment.apiUrl}/users/basic-list`, { withCredentials: true });
   }
 
   /**
@@ -40,7 +41,7 @@ export class UserService {
    * @returns 
    */
   getUserById(userId: number): Observable<UserCreationRequest> {
-    return this.http.get<UserCreationRequest>(`${USER_API_URL}/${userId}`, { withCredentials: true});
+    return this.http.get<UserCreationRequest>(`${environment.apiUrl}/users/${userId}`, { withCredentials: true});
   }
 
   /**
@@ -50,11 +51,11 @@ export class UserService {
    * @returns 
    */
   updateUser(userId: number, request: UserCreationRequest): Observable<UserBasic> {
-    return this.http.put<UserBasic>(`${USER_API_URL}/${userId}`, request, { withCredentials: true });
+    return this.http.put<UserBasic>(`${environment.apiUrl}/users/${userId}`, request, { withCredentials: true });
   }
 
   deleteUser(userId: number): Observable<void> {
-    return this.http.delete<void>(`${USER_API_URL}/${userId}`, { withCredentials: true });
+    return this.http.delete<void>(`${environment.apiUrl}/users/${userId}`, { withCredentials: true });
   }
 
   getAllClients(activeFilter?: boolean, packageFilter?: string): Observable<ClientInfo[]> {
@@ -66,7 +67,7 @@ export class UserService {
       params = params.set('packageFilter', packageFilter);
     }
 
-    return this.http.get<ClientInfo[]>(`${USER_API_URL}/clients-list`, { withCredentials: true });
+    return this.http.get<ClientInfo[]>(`${environment.apiUrl}/users/clients-list`, { withCredentials: true });
   }
 
 }

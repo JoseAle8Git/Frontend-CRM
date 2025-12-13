@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TechIncidenceStats } from '../models/tech-stats.interface';
 import { PackageCount } from '../models/client-dashboard.interface';
+import { environment } from '../../environments/environment.prod';
 
-const STATS_API_URL = 'http://localhost:8080/sistema/api/v1/stats';
+// const STATS_API_URL = 'http://localhost:8080/sistema/api/v1/stats';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class StatsService {
    */
   getIncidenceCountsByTechnician(): Observable<TechIncidenceStats[]> {
     // Enpoint: /stats/incidences-by-tech.
-    return this.http.get<TechIncidenceStats[]>(`${STATS_API_URL}/incidences-by-tech`, { withCredentials: true });
+    return this.http.get<TechIncidenceStats[]>(`${environment.apiUrl}/stats/incidences-by-tech`, { withCredentials: true });
   }
 
   /**
@@ -27,11 +28,11 @@ export class StatsService {
    * @returns 
    */
   getProjectedMonthlyRevenue(): Observable<number> {
-    return this.http.get<number>(`${STATS_API_URL}/revenue`, { withCredentials: true });
+    return this.http.get<number>(`${environment.apiUrl}/stats/revenue`, { withCredentials: true });
   }
 
   getActiveCountsByPackage(): Observable<PackageCount[]> {
-    return this.http.get<PackageCount[]>(`${STATS_API_URL}/package-counts`, { withCredentials: true });
+    return this.http.get<PackageCount[]>(`${environment.apiUrl}/stats/package-counts`, { withCredentials: true });
   }
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment.prod';
 
 // 1. la Empresa client 
 export interface ClientData {
@@ -45,28 +45,28 @@ export class ClientService {
   private http = inject(HttpClient);
 
   // Ajusta el puerto si tu Spring Boot usa otro
-  private apiUrl = 'http://localhost:8080/sistema/api/v1/clients';
+  // private apiUrl = 'http://localhost:8080/sistema/api/v1/clients';
 
   // A. Obtener datos de la empresa
   getClientById(id: number): Observable<ClientData> {
-    return this.http.get<ClientData>(`${this.apiUrl}/${id}`, { withCredentials: true });
+    return this.http.get<ClientData>(`${environment.apiUrl}/clients/${id}`, { withCredentials: true });
   }
 
   // B. Obtener usuario de la empresa
   getUsersByClientId(clientId: number): Observable<CompanyUser[]> {
-    return this.http.get<CompanyUser[]>(`${this.apiUrl}/${clientId}/users`, { withCredentials: true });
+    return this.http.get<CompanyUser[]>(`${environment.apiUrl}/clients/${clientId}/users`, { withCredentials: true });
   }
 
   // C. Obtener clientsofclients
   getSubClients(clientId: number): Observable<SubClient[]> {
     //este endpoint en Java  
-    return this.http.get<SubClient[]>(`${this.apiUrl}/${clientId}/sub-clients`, { withCredentials: true });
+    return this.http.get<SubClient[]>(`${environment.apiUrl}/clients/${clientId}/sub-clients`, { withCredentials: true });
   }
 
   // Pedir mi perfil usando el ClientController
   getMyProfile(): Observable<UserContext> {
     // Llamamos a /clients/profile
-    return this.http.get<UserContext>(`${this.apiUrl}/profile`, { withCredentials: true });
+    return this.http.get<UserContext>(`${environment.apiUrl}/clients/profile`, { withCredentials: true });
   }
 
 }

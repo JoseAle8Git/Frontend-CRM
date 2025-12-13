@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReportLog } from '../models/report-log.interface';
+import { environment } from '../../environments/environment.prod';
 
-const REPORT_API_URL = 'http://localhost:8080/sistema/api/v1/reports';
+// const REPORT_API_URL = 'http://localhost:8080/sistema/api/v1/reports';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class ResportService {
    * @returns 
    */
   getReportLogs(): Observable<ReportLog[]> {
-    return this.http.get<ReportLog[]>(`${REPORT_API_URL}/logs`, { withCredentials: true });
+    return this.http.get<ReportLog[]>(`${environment.apiUrl}/reports/logs`, { withCredentials: true });
   }
 
   /**
@@ -27,7 +28,7 @@ export class ResportService {
    */
   getDownloadUrl(reportId: number): string {
     // La descarga debe hacerse fuera de la suscripción para que el navegador maneje el archivo.
-    return `${REPORT_API_URL}/${reportId}/download`;
+    return `${environment.apiUrl}/reports/${reportId}/download`;
   }
   
 }

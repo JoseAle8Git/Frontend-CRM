@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AssignmentRequest, IncidenceDashboard } from '../models/incidence-dashboard.interface';
+import { environment } from '../../environments/environment.prod';
 
 // Para definir qué datos enviamos 
 export interface CreateIncidenceDTO {
@@ -13,7 +14,7 @@ export interface CreateIncidenceDTO {
 //
 
 
-const INCIDENCE_API_URL = 'http://localhost:8080/sistema/api/v1/incidences';
+// const INCIDENCE_API_URL = 'http://localhost:8080/sistema/api/v1/incidences';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class IncidenceService {
    * @returns 
    */
   findAllIncidencesForDashboard(): Observable<IncidenceDashboard[]> {
-    return this.http.get<IncidenceDashboard[]>(`${INCIDENCE_API_URL}/dashboard-list`, { withCredentials: true });
+    return this.http.get<IncidenceDashboard[]>(`${environment.apiUrl}/incidences/dashboard-list`, { withCredentials: true });
   }
 
   /**
@@ -36,7 +37,7 @@ export class IncidenceService {
    * @returns 
    */
   assignTechnician(request: AssignmentRequest): Observable<IncidenceDashboard> {
-    return this.http.post<IncidenceDashboard>(`${INCIDENCE_API_URL}/assign`, request, { withCredentials: true });
+    return this.http.post<IncidenceDashboard>(`${environment.apiUrl}/incidences/assign`, request, { withCredentials: true });
   }
 
 
@@ -45,13 +46,13 @@ export class IncidenceService {
    */
   createIncidence(incidence: CreateIncidenceDTO): Observable<any> {
     // Usamos la URL base + "/create"
-    return this.http.post(`${INCIDENCE_API_URL}/create`, incidence, { withCredentials: true });
+    return this.http.post(`${environment.apiUrl}/incidences/create`, incidence, { withCredentials: true });
   }
 
   /**
    * Obtiene las incidencias de un cliente específico
    */
   getIncidencesByClient(clientId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${INCIDENCE_API_URL}/client/${clientId}`, { withCredentials: true });
+    return this.http.get<any[]>(`${environment.apiUrl}/incidences/client/${clientId}`, { withCredentials: true });
   }
 }

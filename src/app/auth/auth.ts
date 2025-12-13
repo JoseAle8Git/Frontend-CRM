@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
-const API_URL = 'http://localhost:8080/sistema/api/v1/auth';
+// const API_URL = 'http://localhost:8080/sistema/api/v1/auth';
 
 export interface LoginRequest {
   username: string;
@@ -33,7 +34,7 @@ export class Auth {
   }
 
   login(request: LoginRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${API_URL}/login`, request, { withCredentials: true }).pipe(
+    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`, request, { withCredentials: true }).pipe(
       tap(response => {
         this.setAuth(response);
       })
@@ -58,7 +59,7 @@ export class Auth {
   }
 
   logout(): void {
-    this.http.post(`${API_URL}/logout`, {}, { withCredentials: true, responseType: 'text' as 'json' }).subscribe({
+    this.http.post(`${environment.apiUrl}/auth/logout`, {}, { withCredentials: true, responseType: 'text' as 'json' }).subscribe({
       next: () => {
         this.currentUser = null;
         localStorage.removeItem(this.USER_KEY);
