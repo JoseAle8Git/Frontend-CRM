@@ -2,10 +2,10 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "start": "npm exec ng serve",
-    "build": "npm exec ng build",
-    "watch": "npm exec ng build --watch --configuration development",
-    "test": "npm exec ng test"
+    "start": "node ./node_modules/@angular/cli/bin/ng.js serve",
+    "build": "node ./node_modules/@angular/cli/bin/ng.js build",
+    "watch": "node ./node_modules/@angular/cli/bin/ng.js build --watch --configuration development",
+    "test": "node ./node_modules/@angular/cli/bin/ng.js test"
   },
   "prettier": {
     "printWidth": 100,
