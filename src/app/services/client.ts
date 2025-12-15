@@ -69,4 +69,9 @@ export class ClientService {
     return this.http.get<UserContext>(`${environment.apiUrl}/clients/profile`, { withCredentials: true });
   }
 
+  // Función para crear sub-cliente
+  createSubClient(data: { name: string, billing: number, active: boolean }): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/clients/sub-clients`, data, { withCredentials: true });
+  }
+
 }
